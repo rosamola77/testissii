@@ -2,17 +2,19 @@
 
 ### Login as a valid user (Daniel)
 # @name login
-POST /login
+POST {{BASE}}/login
 Content-Type: application/json
+
 {
     "email": "daniel@alum.us.es",
     "password": "daniel"
 }
 ###
 # [P] 1. Crear asignatura con datos correctos.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": "FI",
@@ -23,9 +25,10 @@ Content-Type: application/json
 }
 ###
 # [N] 2. Crear asignatura con nombre vacío.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": null,
     "acronym": "FP",
@@ -36,9 +39,10 @@ Content-Type: application/json
 }
 ###
 # [N] 3. Crear asignatura con el mismo nombre que otra ya existente.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": "FP2",
@@ -49,9 +53,10 @@ Content-Type: application/json
 }
 ###
 # [N] 4. Crear asignatura con acrónimo vacío.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": null,
@@ -62,9 +67,10 @@ Content-Type: application/json
 }
 ###
 # [N] 5. Crear asignatura con el mismo acrónimo que una ya existente.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": "FP",
@@ -75,9 +81,10 @@ Content-Type: application/json
 }
 ###
 # [N] 6. Crear asignatura con créditos incorrectos.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": "FI",
@@ -88,9 +95,10 @@ Content-Type: application/json
 }
 ###
 # [N] 7. Crear asignatura con curso incorrecto.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": "FI",
@@ -101,9 +109,10 @@ Content-Type: application/json
 }
 ###
 # [N] 8. Crear asignatura con tipo incorrecto.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": "FI",
@@ -114,9 +123,10 @@ Content-Type: application/json
 }
 ###
 # [P] 9. Actualizar asignatura con valores correctos.
-PUT /subjects/14
-Token: 
+PUT {{BASE}}/subjects/14
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Física Informática",
     "acronym": "FI",
@@ -127,9 +137,10 @@ Content-Type: application/json
 }
 ###
 # [N] 10. Actualizar asignatura con el mismo nombre que otra.
-PUT /subjects/2
-Token: 
+PUT {{BASE}}/subjects/2
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": "FP2",
@@ -140,9 +151,10 @@ Content-Type: application/json
 }
 ###
 # [N] 11. Actualizar asignatura con nombre a None.
-PUT /subjects/1
-Token: 
+PUT {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": null,
     "acronym": "FP",
@@ -153,9 +165,10 @@ Content-Type: application/json
 }
 ###
 # [N] 12. Actualizar asignatura con el mismo acrónimo que otra.
-PUT /subjects/2
-Token: 
+PUT {{BASE}}/subjects/2
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos",
     "acronym": "FP",
@@ -166,9 +179,10 @@ Content-Type: application/json
 }
 ###
 # [N] 13. Actualizar asignatura con acrónimo a None.
-PUT /subjects/1
-Token: 
+PUT {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": null,
@@ -179,9 +193,10 @@ Content-Type: application/json
 }
 ###
 # [N] 14. Actualizar asignatura con créditos incorrectos.
-PUT /subjects/1
-Token: 
+PUT {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": "FP",
@@ -192,9 +207,10 @@ Content-Type: application/json
 }
 ###
 # [N] 15. Actualizar asignatura con curso incorrecto.
-PUT /subjects/1
-Token: 
+PUT {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": "FP",
@@ -205,9 +221,10 @@ Content-Type: application/json
 }
 ###
 # [N] 16. Actualizar asignatura con tipo incorrecto.
-PUT /subjects/1
-Token: 
+PUT {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": "FP",
@@ -218,21 +235,22 @@ Content-Type: application/json
 }
 ###
 # [P] 17. Borrar asignatura.
-DELETE /subjects/3
-Token: 
+DELETE {{BASE}}/subjects/3
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 18. Borrar asignatura que ha sido borrada (no lanza excepción).
-DELETE /subjects/3
-Token: 
+DELETE {{BASE}}/subjects/3
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 19. Borrar asignatura con relaciones.
-DELETE /subjects/1
-Token: 
+DELETE {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 20. Crear una asignación entre grado y asignatura, con grado a None.
-POST /subjects
-Token: 
+POST {{BASE}}/subjects
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Matemática Discreta",
     "acronym": "MD",
@@ -243,9 +261,10 @@ Content-Type: application/json
 }
 ###
 # [N] 21. Actualizar una asignación entre grado y asignatura, con grado a None.
-PUT /subjects/1
-Token: 
+PUT {{BASE}}/subjects/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "name": "Fundamentos de Programación",
     "acronym": "FP",
