@@ -2,76 +2,83 @@
 
 ### Login as a valid user (Daniel)
 # @name login
-POST /login
+POST {{BASE}}/login
 Content-Type: application/json
+
 {
     "email": "daniel@alum.us.es",
     "password": "daniel"
 }
 ###
 # [P] 1. Añadir estudiante a grupo con datos correctos.
-POST /groupsStudents
-Token: 
+POST {{BASE}}/groupsstudents
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "groupId": 3,
     "studentId": 4
 }
 ###
 # [N] 2. Añadir estudiante a grupo con groupId a NULL.
-POST /groupsStudents
-Token: 
+POST {{BASE}}/groupsstudents
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "groupId": null,
     "studentId": 4
 }
 ###
 # [N] 3. Añadir estudiante a grupo con studentId a NULL.
-POST /groupsStudents
-Token: 
+POST {{BASE}}/groupsstudents
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "groupId": 3,
     "studentId": null
 }
 ###
 # [N] 4. Añadir estudiante a grupo con groupId inexistente (fallo FK).
-POST /groupsStudents
-Token: 
+POST {{BASE}}/groupsstudents
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "groupId": 9999,
     "studentId": 4
 }
 ###
 # [N] 5. Añadir estudiante a grupo con studentId inexistente (fallo FK).
-POST /groupsStudents
-Token: 
+POST {{BASE}}/groupsstudents
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "groupId": 3,
     "studentId": 9999
 }
 ###
 # [N] 6. Añadir estudiante duplicado al mismo grupo (mismo groupId y studentId).
-POST /groupsStudents
-Token: 
+POST {{BASE}}/groupsstudents
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "groupId": 3,
     "studentId": 4
 }
 ###
 # [P] 7. Borrar inscripción (relación) existente.
-DELETE /groupsStudents/5
-Token: 
+DELETE {{BASE}}/groupsstudents/5
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 8. Borrar inscripción que no existe (no lanza excepción).
-DELETE /groupsStudents/9999
-Token: 
+DELETE {{BASE}}/groupsstudents/9999
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 9. Borrar grupo que tiene inscripciones (espera fallo por FK al intentar borrar el grupo).
-DELETE /groups/3
-Token: 
+DELETE {{BASE}}/groups/3
+Token: {{login.response.body.sessionToken}}
 ###
