@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 ###
 # [P] 5. Actualizar grado con datos correctos.
-PUT {{BASE}}/degrees/7
+PUT {{BASE}}/degrees/4
 Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
 
@@ -81,7 +81,7 @@ Content-Type: application/json
 }
 ###
 # [N] 8. Actualizar grado con years incorrectos.
-PUT {{BASE}}/degrees/1
+PUT {{BASE}}/degrees/4
 Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
 
@@ -91,7 +91,7 @@ Content-Type: application/json
 }
 ###
 # [P] 9. Eliminar grado.
-DELETE {{BASE}}/degrees/7
+DELETE {{BASE}}/degrees/4
 Token: {{login.response.body.sessionToken}}
 ###
 # [N] 10. Eliminar grado no existente (no lanza excepción).
