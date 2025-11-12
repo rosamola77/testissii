@@ -2,17 +2,19 @@
 
 ### Login as a valid user (Daniel)
 # @name login
-POST /login
+POST {{BASE}}/login
 Content-Type: application/json
+
 {
     "email": "daniel@alum.us.es",
     "password": "daniel"
 }
 ###
 # [P] 1. Crear nota con datos correctos.
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 8.50,
     "gradeCall": 1,
@@ -22,9 +24,10 @@ Content-Type: application/json
 }
 ###
 # [N] 2. Crear nota con value < 0.
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": -0.50,
     "gradeCall": 1,
@@ -34,9 +37,10 @@ Content-Type: application/json
 }
 ###
 # [N] 3. Crear nota con value > 10.
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 10.50,
     "gradeCall": 1,
@@ -46,9 +50,10 @@ Content-Type: application/json
 }
 ###
 # [N] 4. Crear nota con gradeCall inválido (0).
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 6.00,
     "gradeCall": 0,
@@ -58,9 +63,10 @@ Content-Type: application/json
 }
 ###
 # [N] 5. Crear nota con gradeCall inválido (4).
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 6.00,
     "gradeCall": 4,
@@ -70,9 +76,10 @@ Content-Type: application/json
 }
 ###
 # [N] 6. Crear nota con withHonours a NULL.
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 7.00,
     "gradeCall": 1,
@@ -82,9 +89,10 @@ Content-Type: application/json
 }
 ###
 # [N] 7. Crear nota con studentId a NULL.
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 7.00,
     "gradeCall": 1,
@@ -94,9 +102,10 @@ Content-Type: application/json
 }
 ###
 # [N] 8. Crear nota con groupId a NULL.
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 7.00,
     "gradeCall": 1,
@@ -106,9 +115,10 @@ Content-Type: application/json
 }
 ###
 # [N] 9. Crear nota con studentId inexistente (fallo FK).
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 7.00,
     "gradeCall": 1,
@@ -118,9 +128,10 @@ Content-Type: application/json
 }
 ###
 # [N] 10. Crear nota con groupId inexistente (fallo FK).
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 7.00,
     "gradeCall": 1,
@@ -130,9 +141,10 @@ Content-Type: application/json
 }
 ###
 # [N] 11. Crear nota duplicada en la misma convocatoria para el mismo estudiante y grupo (mismo gradeCall, studentId y groupId).
-POST /grades
-Token: 
+POST {{BASE}}/grades
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 9.00,
     "gradeCall": 1,
@@ -142,9 +154,10 @@ Content-Type: application/json
 }
 ###
 # [P] 12. Actualizar nota con datos correctos.
-PUT /grades/1
-Token: 
+PUT {{BASE}}/grades/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 9.50,
     "gradeCall": 2,
@@ -154,9 +167,10 @@ Content-Type: application/json
 }
 ###
 # [N] 13. Actualizar nota con value inválido.
-PUT /grades/1
-Token: 
+PUT {{BASE}}/grades/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 12.00,
     "gradeCall": 2,
@@ -166,9 +180,10 @@ Content-Type: application/json
 }
 ###
 # [N] 14. Actualizar nota provocando duplicado de convocatoria para el mismo estudiante y grupo.
-PUT /grades/2
-Token: 
+PUT {{BASE}}/grades/2
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "value": 8.00,
     "gradeCall": 2,
@@ -178,18 +193,18 @@ Content-Type: application/json
 }
 ###
 # [P] 15. Borrar nota.
-DELETE /grades/3
-Token: 
+DELETE {{BASE}}/grades/3
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 16. Borrar nota que no existe (no lanza excepción).
-DELETE /grades/9999
-Token: 
+DELETE {{BASE}}/grades/9999
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 17. Borrar alumno/grupo que tiene notas (intentar borrar student o group debería fallar por FK si existen notas).
-DELETE /students/4
-Token: 
+DELETE {{BASE}}/students/4
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 18. Borrar grupo con notas existentes (espera fallo por FK).
-DELETE /groups/3
-Token: 
+DELETE {{BASE}}/groups/3
+Token: {{login.response.body.sessionToken}}
 ###
