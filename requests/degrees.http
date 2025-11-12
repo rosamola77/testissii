@@ -1,0 +1,94 @@
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Login as a valid user (Daniel)
+# @name login
+POST /login
+Content-Type: application/json
+{
+    "email": "daniel@alum.us.es",
+    "password": "daniel"
+}
+###
+# [P] 1. Crear grado con datos correctos.
+POST /degrees
+Token: 
+Content-Type: application/json
+{
+    "name": "Grado en Ingeniería de la Salud",
+    "years": 4
+}
+###
+# [N] 2. Crear grado con nombre vacío.
+POST /degrees
+Token: 
+Content-Type: application/json
+{
+    "name": null,
+    "years": 4
+}
+###
+# [N] 3. Crear grado con el mismo nombre que otro ya existente.
+POST /degrees
+Token: 
+Content-Type: application/json
+{
+    "name": "Grado en Ingeniería de la Salud",
+    "years": 4
+}
+###
+# [N] 4. Crear grado con years incorrectos.
+POST /degrees
+Token: 
+Content-Type: application/json
+{
+    "name": "Grado con anyos incorrectos",
+    "years": -1
+}
+###
+# [P] 5. Actualizar grado con datos correctos.
+PUT /degrees/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Grado en Ingeniería de la Salud Actualizado",
+    "years": 3
+}
+###
+# [N] 6. Actualizar grado con nombre a NULL.
+PUT /degrees/1
+Token: 
+Content-Type: application/json
+{
+    "name": null,
+    "years": 4
+}
+###
+# [N] 7. Actualizar grado con el mismo nombre que otro existente.
+PUT /degrees/2
+Token: 
+Content-Type: application/json
+{
+    "name": "Grado en Ingeniería de la Salud Actualizado",
+    "years": 4
+}
+###
+# [N] 8. Actualizar grado con years incorrectos.
+PUT /degrees/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Grado en Ingeniería de la Salud Actualizado",
+    "years": -1
+}
+###
+# [P] 9. Eliminar grado.
+DELETE /degrees/4
+Token: 
+###
+# [N] 10. Eliminar grado no existente (no lanza excepción).
+DELETE /degrees/9999
+Token: 
+###
+# [N] 11. Eliminar grado con relaciones.
+DELETE /degrees/1
+Token: 

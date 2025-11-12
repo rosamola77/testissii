@@ -1,0 +1,256 @@
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Login as a valid user (Daniel)
+# @name login
+POST /login
+Content-Type: application/json
+{
+    "email": "daniel@alum.us.es",
+    "password": "daniel"
+}
+###
+# [P] 1. Crear asignatura con datos correctos.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": "FI",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 2. Crear asignatura con nombre vacío.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": null,
+    "acronym": "FP",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 3. Crear asignatura con el mismo nombre que otra ya existente.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": "FP2",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 4. Crear asignatura con acrónimo vacío.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": null,
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 5. Crear asignatura con el mismo acrónimo que una ya existente.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": "FP",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 6. Crear asignatura con créditos incorrectos.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": "FI",
+    "credits": -1,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 7. Crear asignatura con curso incorrecto.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": "FI",
+    "credits": 6,
+    "year": 7,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 8. Crear asignatura con tipo incorrecto.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": "FI",
+    "credits": 6,
+    "year": 1,
+    "type": "Incorrecto",
+    "degreeId": 1
+}
+###
+# [P] 9. Actualizar asignatura con valores correctos.
+PUT /subjects/14
+Token: 
+Content-Type: application/json
+{
+    "name": "Física Informática",
+    "acronym": "FI",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 10. Actualizar asignatura con el mismo nombre que otra.
+PUT /subjects/2
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": "FP2",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 11. Actualizar asignatura con nombre a None.
+PUT /subjects/1
+Token: 
+Content-Type: application/json
+{
+    "name": null,
+    "acronym": "FP",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 12. Actualizar asignatura con el mismo acrónimo que otra.
+PUT /subjects/2
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos",
+    "acronym": "FP",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 13. Actualizar asignatura con acrónimo a None.
+PUT /subjects/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": null,
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 14. Actualizar asignatura con créditos incorrectos.
+PUT /subjects/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": "FP",
+    "credits": -1,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 15. Actualizar asignatura con curso incorrecto.
+PUT /subjects/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": "FP",
+    "credits": 6,
+    "year": 7,
+    "type": "Obligatoria",
+    "degreeId": 1
+}
+###
+# [N] 16. Actualizar asignatura con tipo incorrecto.
+PUT /subjects/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": "FP",
+    "credits": 6,
+    "year": 1,
+    "type": "Incorrecto",
+    "degreeId": 1
+}
+###
+# [P] 17. Borrar asignatura.
+DELETE /subjects/3
+Token: 
+###
+# [N] 18. Borrar asignatura que ha sido borrada (no lanza excepción).
+DELETE /subjects/3
+Token: 
+###
+# [N] 19. Borrar asignatura con relaciones.
+DELETE /subjects/1
+Token: 
+###
+# [N] 20. Crear una asignación entre grado y asignatura, con grado a None.
+POST /subjects
+Token: 
+Content-Type: application/json
+{
+    "name": "Matemática Discreta",
+    "acronym": "MD",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": null
+}
+###
+# [N] 21. Actualizar una asignación entre grado y asignatura, con grado a None.
+PUT /subjects/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Fundamentos de Programación",
+    "acronym": "FP",
+    "credits": 6,
+    "year": 1,
+    "type": "Obligatoria",
+    "degreeId": null
+}
