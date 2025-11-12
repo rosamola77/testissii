@@ -1,0 +1,155 @@
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Login as a valid user (Daniel)
+# @name login
+POST /login
+Content-Type: application/json
+{
+    "email": "daniel@alum.us.es",
+    "password": "daniel"
+}
+###
+# [P] 1. Crear grupo con datos correctos.
+POST /groups
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A",
+    "activity": "Teoría",
+    "year": 1,
+    "subjectId": 1
+}
+###
+# [N] 2. Crear grupo con name a NULL.
+POST /groups
+Token: 
+Content-Type: application/json
+{
+    "name": null,
+    "activity": "Teoría",
+    "year": 1,
+    "subjectId": 1
+}
+###
+# [N] 3. Crear grupo con activity inválida.
+POST /groups
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo B",
+    "activity": "Seminario",
+    "year": 1,
+    "subjectId": 1
+}
+###
+# [N] 4. Crear grupo con year inválido (<= 0).
+POST /groups
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo C",
+    "activity": "Teoría",
+    "year": 0,
+    "subjectId": 1
+}
+###
+# [N] 5. Crear grupo con subjectId a NULL.
+POST /groups
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo D",
+    "activity": "Laboratorio",
+    "year": 1,
+    "subjectId": null
+}
+###
+# [N] 6. Crear grupo duplicado (mismo name, year y subjectId).
+POST /groups
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A",
+    "activity": "Teoría",
+    "year": 1,
+    "subjectId": 1
+}
+###
+# [P] 7. Actualizar grupo con datos correctos.
+PUT /groups/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A Actualizado",
+    "activity": "Laboratorio",
+    "year": 2,
+    "subjectId": 1
+}
+###
+# [N] 8. Actualizar grupo con name a NULL.
+PUT /groups/1
+Token: 
+Content-Type: application/json
+{
+    "name": null,
+    "activity": "Laboratorio",
+    "year": 2,
+    "subjectId": 1
+}
+###
+# [N] 9. Actualizar grupo con activity inválida.
+PUT /groups/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A Actualizado",
+    "activity": "Taller",
+    "year": 2,
+    "subjectId": 1
+}
+###
+# [N] 10. Actualizar grupo con year inválido.
+PUT /groups/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A Actualizado",
+    "activity": "Laboratorio",
+    "year": -1,
+    "subjectId": 1
+}
+###
+# [N] 11. Actualizar grupo con subjectId a NULL.
+PUT /groups/1
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A Actualizado",
+    "activity": "Laboratorio",
+    "year": 2,
+    "subjectId": null
+}
+###
+# [N] 12. Actualizar grupo provocando duplicado (nombre, año y subjectId ya existentes).
+PUT /groups/2
+Token: 
+Content-Type: application/json
+{
+    "name": "Grupo A Actualizado",
+    "activity": "Laboratorio",
+    "year": 2,
+    "subjectId": 1
+}
+###
+# [P] 13. Borrar grupo.
+DELETE /groups/3
+Token: 
+###
+# [N] 14. Borrar grupo que no existe (no lanza excepción).
+DELETE /groups/9999
+Token: 
+###
+# [N] 15. Borrar grupo que tiene relaciones (p. ej. estudiantes o notas) — espera fallo por FK.
+DELETE /groups/1
+Token: 
+###
