@@ -2,16 +2,18 @@
 
 ### Login as a valid user (Daniel)
 # @name login
-POST /login
+POST {{BASE}}/login
 Content-Type: application/json
+
 {
     "email": "daniel@alum.us.es",
     "password": "daniel"
 }
 ###
 # [P] 1. Crear alumno con datos correctos.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -23,8 +25,9 @@ Content-Type: application/json
 }
 ###
 # [N] 2. Crear alumno con el mismo DNI que otro.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678A",
@@ -36,8 +39,9 @@ Content-Type: application/json
 }
 ###
 # [N] 3. Crear alumno con el mismo email que otro.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -49,8 +53,9 @@ Content-Type: application/json
 }
 ###
 # [N] 4. Crear alumno con formato de fecha de nacimiento incorrecta.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -62,8 +67,9 @@ Content-Type: application/json
 }
 ###
 # [N] 5. Crear alumno con método de acceso incorrecto.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "InvalidMethod",
     "dni": "12345678F",
@@ -75,8 +81,9 @@ Content-Type: application/json
 }
 ###
 # [N] 6. Crear alumno con nombre vacío.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -88,8 +95,9 @@ Content-Type: application/json
 }
 ###
 # [N] 7. Crear alumno con apellidos vacío.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -101,8 +109,9 @@ Content-Type: application/json
 }
 ###
 # [N] 8. Crear alumno con email vacío.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -114,8 +123,9 @@ Content-Type: application/json
 }
 ###
 # [N] 9. Crear alumno con DNI vacío.
-POST /register
+POST {{BASE}}/register
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": null,
@@ -127,9 +137,10 @@ Content-Type: application/json
 }
 ###
 # [P] 10. Actualizar alumno con datos correctos.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678Z",
@@ -141,9 +152,10 @@ Content-Type: application/json
 }
 ###
 # [N] 11. Actualizar alumno con el mismo DNI que otro.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678B",
@@ -155,9 +167,10 @@ Content-Type: application/json
 }
 ###
 # [N] 12. Actualizar alumno con el mismo email que otro.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678W",
@@ -169,9 +182,10 @@ Content-Type: application/json
 }
 ###
 # [N] 13. Actualizar alumno con formato de fecha de nacimiento incorrecto.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -183,9 +197,10 @@ Content-Type: application/json
 }
 ###
 # [N] 14. Actualizar alumno con método de acceso incorrecto.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "InvalidMethod",
     "dni": "12345678F",
@@ -197,9 +212,10 @@ Content-Type: application/json
 }
 ###
 # [N] 15. Actualizar alumno con nombre vacío.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -211,9 +227,10 @@ Content-Type: application/json
 }
 ###
 # [N] 16. Actualizar alumno con apellidos vacío.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -225,9 +242,10 @@ Content-Type: application/json
 }
 ###
 # [N] 17. Actualizar alumno con email vacío.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": "12345678F",
@@ -239,9 +257,10 @@ Content-Type: application/json
 }
 ###
 # [N] 18. Actualizar alumno con DNI vacío.
-PUT /students/1
-Token: 
+PUT {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
 Content-Type: application/json
+
 {
     "accessMethod": "Selectividad",
     "dni": null,
@@ -253,13 +272,13 @@ Content-Type: application/json
 }
 ###
 # [P] 19. Borrar alumno.
-DELETE /students/3
-Token: 
+DELETE {{BASE}}/students/3
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 20. Borrar alumno que no existe (no lanza excepción).
-DELETE /students/999
-Token: 
+DELETE {{BASE}}/students/999
+Token: {{login.response.body.sessionToken}}
 ###
 # [N] 21. Borrar alumno que tiene relaciones.
-DELETE /students/1
-Token: 
+DELETE {{BASE}}/students/1
+Token: {{login.response.body.sessionToken}}
