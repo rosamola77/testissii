@@ -49,7 +49,7 @@ Token: {{login.response.body.sessionToken}}
 
 ###
 
-PUT {{BASE}}/degrees/6
+PUT {{BASE}}/degrees/4
 Content-Type: application/json
 Token: {{login.response.body.sessionToken}}
 
